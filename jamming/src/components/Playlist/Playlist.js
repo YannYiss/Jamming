@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 export default function Playlist() {
   return (
     <>
-    <div>Playlist</div>
+    <input type='text'/>
     <Button/>
     </>
   )

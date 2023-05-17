@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 export default function SearchBar() {
   return (
     <>
-    <div>SearchBar</div>
+    <input type='text'/>
     <Button />
     </>
   )

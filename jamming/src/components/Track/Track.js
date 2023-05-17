@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default function Track() {
+export default function Track(props) {
   return (
-    <div>Track</div>
+    <div>
+      <h3>{props.songName}</h3>
+      <h4>{props.artist}</h4>
+      <h5>{props.album}</h5>
+    </div>
   )
 }
