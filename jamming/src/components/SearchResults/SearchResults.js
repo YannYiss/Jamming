@@ -1,7 +1,10 @@
 import React from 'react'
+import Tracklist from '../Tracklist/Tracklist'
 
-export default function SearchResults() {
+export default function SearchResults({songList, clickHandler}) {
   return (
-    <div>SearchResults</div>
+    <div>
+      <Tracklist songList={songList} clickHandler = {clickHandler}/>
+    </div>
   )
 }

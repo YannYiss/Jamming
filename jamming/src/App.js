@@ -3,10 +3,9 @@ import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import Playlist from './components/Playlist/Playlist';
 import SearchResults from './components/SearchResults/SearchResults';
-import Tracklist from './components/Tracklist/Tracklist';
 
 function App() {
-  const [songList, setSongList] = useState([{
+  const songList = [{
     songName: 'Alive',
     artist: 'Pearl Jam',
     album: 'rearviewmirror'
@@ -16,14 +15,22 @@ function App() {
     artist: 'Stone Sour',
     album: 'Come What(ever) May'
   }
-]);
+];
+
+  const [chosenSongs, setChosenSongs] = useState([]);
+
+  const addTrack = (e) => {
+    const selectedSong = e.target.parentElement.children[0]
+    alert('hello');
+    console.log(selectedSong)
+    
+  };
 
   return (
     <div className="App">
       <SearchBar />
-      <SearchResults />
-      <Tracklist songList={songList} />
-      <Playlist />
+      <SearchResults songList={songList} clickHandler={addTrack}/>
+      <Playlist chosenSongs={chosenSongs}/>
     </div>
   );
 }
