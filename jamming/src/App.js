@@ -8,12 +8,14 @@ function App() {
   const songList = [{
     songName: 'Alive',
     artist: 'Pearl Jam',
-    album: 'rearviewmirror'
+    album: 'rearviewmirror',
+    uri: 'dfsv5sd46f28a4sf6sd54f2ad42f6g4g'
   },
   {
     songName: 'Wicked Game',
     artist: 'Stone Sour',
-    album: 'Come What(ever) May'
+    album: 'Come What(ever) May',
+    uri: '6asdf42sxfh42df6h24df6g524d68g2s'
   }
 ];
 
@@ -24,7 +26,8 @@ function App() {
     const songAdded = {
       songName: selectedSong.querySelector('h3').innerText,
       artist: selectedSong.querySelector('h4').innerText,
-      album: selectedSong.querySelector('h5').innerText
+      album: selectedSong.querySelector('h5').innerText,
+      
     }
     setChosenSongs(songList => [...songList,songAdded]);
   };
@@ -46,13 +49,25 @@ function App() {
       });
       return updatedArray
     });
+  };
+
+  const renamePlaylist = (e) => {
+    const playlistName = e.target.value;
+  };
+
+  const savePlaylist = () => {
+    console.log(chosenSongs)
+    let songsURI = [];
+    chosenSongs.map(song => songsURI.push(song.uri));
+    console.log(songsURI)
+    return songsURI;
   }
 
   return (
     <div className="App">
       <SearchBar />
       <SearchResults songList={songList} clickHandler={addTrack}/>
-      <Playlist chosenSongs={chosenSongs} clickHandler={removeTrack}/>
+      <Playlist chosenSongs={chosenSongs} clickHandler={removeTrack} typeHandler={renamePlaylist} submitHandler={savePlaylist}/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Button() {
+export default function Button(props) {
   return (
-    <button>Submit</button>
+    <button onClick={props.submitHandler}>{props.text}</button>
   )
 }
