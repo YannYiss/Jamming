@@ -30,8 +30,22 @@ function App() {
   };
 
   const removeTrack = (e) => {
-    const selectedSong = e.target.parentElement;
-    selectedSong.parentNode.removeChild(selectedSong);
+    const selectedSong = e.target.parentElement.children[0];
+    const songToRemove = {
+      songName: selectedSong.querySelector('h3').innerText,
+      artist: selectedSong.querySelector('h4').innerText,
+      album: selectedSong.querySelector('h5').innerText
+    };
+    setChosenSongs(songList => {
+      const updatedArray = songList.filter((song) => {
+        if (song.songName === songToRemove.songName && song.artist === songToRemove.artist && song.album === songToRemove.album) {
+          return false
+        } else {
+          return true 
+        }
+      });
+      return updatedArray
+    });
   }
 
   return (
