@@ -1,25 +1,18 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import Playlist from './components/Playlist/Playlist';
 import SearchResults from './components/SearchResults/SearchResults';
+import Spotify from './Utils/Spotify';
 
 function App() {
-  const songList = [{
-    songName: 'Alive',
-    artist: 'Pearl Jam',
-    album: 'rearviewmirror',
-    uri: 'dfsv5sd46f28a4sf6sd54f2ad42f6g4g'
-  },
-  {
-    songName: 'Wicked Game',
-    artist: 'Stone Sour',
-    album: 'Come What(ever) May',
-    uri: '6asdf42sxfh42df6h24df6g524d68g2s'
-  }
-];
-
+  const [songList, setSongList] = useState([]) 
   const [chosenSongs, setChosenSongs] = useState([]);
+  const [playlistName, setPlaylistName] = useState(['New Playlist']);
+
+  const searchSongs = useCallback((term) => {
+    Spotify.search(term).then(setSongList)
+  })
 
   const addTrack = (e) => {
     const selectedSong = e.target.parentElement.children[0];
@@ -27,7 +20,7 @@ function App() {
       songName: selectedSong.querySelector('h3').innerText,
       artist: selectedSong.querySelector('h4').innerText,
       album: selectedSong.querySelector('h5').innerText,
-      
+      uri: e.target.parentElement.id
     }
     setChosenSongs(songList => [...songList,songAdded]);
   };
@@ -37,11 +30,12 @@ function App() {
     const songToRemove = {
       songName: selectedSong.querySelector('h3').innerText,
       artist: selectedSong.querySelector('h4').innerText,
-      album: selectedSong.querySelector('h5').innerText
+      album: selectedSong.querySelector('h5').innerText,
+      uri: e.target.parentElement.id
     };
     setChosenSongs(songList => {
       const updatedArray = songList.filter((song) => {
-        if (song.songName === songToRemove.songName && song.artist === songToRemove.artist && song.album === songToRemove.album) {
+        if (song.uri === songToRemove.uri) {
           return false
         } else {
           return true 
@@ -52,22 +46,21 @@ function App() {
   };
 
   const renamePlaylist = (e) => {
-    const playlistName = e.target.value;
+    setPlaylistName(e.target.value);
   };
 
   const savePlaylist = () => {
-    console.log(chosenSongs)
     let songsURI = [];
     chosenSongs.map(song => songsURI.push(song.uri));
-    console.log(songsURI)
+    console.log(songsURI);
     return songsURI;
   }
 
   return (
     <div className="App">
-      <SearchBar />
+      <SearchBar onSearch={searchSongs}/>
       <SearchResults songList={songList} clickHandler={addTrack}/>
-      <Playlist chosenSongs={chosenSongs} clickHandler={removeTrack} typeHandler={renamePlaylist} submitHandler={savePlaylist}/>
+      <Playlist chosenSongs={chosenSongs} clickHandler={removeTrack} typeHandler={renamePlaylist} submitHandler={savePlaylist} playlistName={playlistName}/>
     </div>
   );
 }
