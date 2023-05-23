@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '../Button/Button'
 import Track from '../Track/Track'
 
 export default function Playlist({chosenSongs, clickHandler, typeHandler, submitHandler, playlistName}) {
@@ -15,7 +14,7 @@ export default function Playlist({chosenSongs, clickHandler, typeHandler, submit
           </div>
         )
         })}
-      <Button text='Save Playlist' submitHandler={submitHandler}/>
+      <button onClick={submitHandler}>Save Playlist</button>
     </div>
   )
 }

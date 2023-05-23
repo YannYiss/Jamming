@@ -11,8 +11,8 @@ function App() {
   const [playlistName, setPlaylistName] = useState(['New Playlist']);
 
   const searchSongs = useCallback((term) => {
-    Spotify.search(term).then(setSongList)
-  })
+    Spotify.search(term).then(setSongList);
+  }, [])
 
   const addTrack = (e) => {
     const selectedSong = e.target.parentElement.children[0];

@@ -13,6 +13,7 @@ const Spotify = {
         const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
         if(accessTokenMatch && expiresInMatch) {
+            accessToken = accessTokenMatch[1]
             const expiresIn = Number(expiresInMatch[1]);
             //Vamos a programar un setTimeout en el objeto global window para poder refrescar el token cada vez que Spotify lo determine por expiresIn
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
@@ -37,14 +38,16 @@ const Spotify = {
         }).then(response => {
             return response.json()
         }).then(jsonResponse => {
+            console.log(jsonResponse)
             if(!jsonResponse.tracks) {
                 return [];
             }
             //Como recordatorio, el metodo map va a regresar un nuevo array con las condiciones especificadas por el metodo map 
-            return jsonResponse.track.map(song => ({
+            return jsonResponse.tracks.items.map(song => ({
                 id: song.id,
                 name: song.name,
-                album: song.album,
+                artist: song.artists[0].name,
+                album: song.album.name,
                 uri: song.uri
             }));
         });
