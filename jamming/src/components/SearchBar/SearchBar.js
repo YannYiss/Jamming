@@ -7,7 +7,7 @@ export default function SearchBar({onSearch}) {
     setSearchTerm(e.target.value);
   };
 
-  const search = useCallback((searchTerm) => {
+  const search = useCallback(() => {
     onSearch(searchTerm);
   }, [onSearch, searchTerm]);
   
