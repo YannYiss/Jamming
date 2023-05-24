@@ -13,7 +13,7 @@ export default function SearchBar({onSearch}) {
   
   return (
     <>
-    <input type='text' onChange={searchTypeHandler}/>
+    <input type='text' placeholder='Enter a song title' onChange={searchTypeHandler}/>
     <button onClick={search}>Search</button>
     </>
   )

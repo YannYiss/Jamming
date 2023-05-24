@@ -1,12 +1,17 @@
-import React from 'react'
-import Track from '../Track/Track'
+import React from 'react';
+import Track from '../Track/Track';
 
-export default function Playlist({chosenSongs, clickHandler, typeHandler, submitHandler, playlistName}) {
+export default function Playlist({playlistTracks, clickHandler, saveHandler, nameInputHandler, playlistName}) {
+
+  const typeHandler = (e) => {
+    nameInputHandler(e.target.value)
+  }
+
   return (
     <div className='playlist'>
       <label htmlFor='playlistName' display='none'></label>
       <input type='text' onChange={typeHandler} id='playlistName' value={playlistName}/>
-      {chosenSongs.map(song => {
+      {playlistTracks.map(song => {
         return(
           <div className='selectedTrack' id={song.uri} key={'p'+song.uri}>
             <Track songName={song.songName} artist={song.artist} album={song.album} className='track'/>
@@ -14,7 +19,7 @@ export default function Playlist({chosenSongs, clickHandler, typeHandler, submit
           </div>
         )
         })}
-      <button onClick={submitHandler}>Save Playlist</button>
+      <button onClick={saveHandler}>Save Playlist</button>
     </div>
   )
 }

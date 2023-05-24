@@ -6,13 +6,13 @@ import SearchResults from './components/SearchResults/SearchResults';
 import Spotify from './Utils/Spotify';
 
 function App() {
-  const [songList, setSongList] = useState([]) 
-  const [chosenSongs, setChosenSongs] = useState([]);
-  const [playlistName, setPlaylistName] = useState(['New Playlist']);
-  const [playlist, setPlaylist] = useState([]);
+  const [searchResults, setSearchResults] = useState([]) 
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [playlistName, setPlaylistName] = useState('New Playlist');
+  const playlistURIS = []
 
   const searchSongs = useCallback((term) => {
-    Spotify.search(term).then(setSongList);
+    Spotify.search(term).then(setSearchResults);
   }, [])
 
   const addTrack = (e) => {
@@ -24,11 +24,10 @@ function App() {
       album: selectedSong.querySelector('h5').innerText,
       uri: songURI
     }
-    if(playlist.includes(songURI)) {
-      alert('This song was already added to the playlist');
+    if(playlistTracks.some(song => song.uri === songAdded.uri)) {
+      return alert('This song was already added to the playlist');
     } else {
-      setPlaylist([...playlist, songURI]);
-      setChosenSongs(songList => [...songList,songAdded]);
+      setPlaylistTracks(songList => [...songList,songAdded]);
     }
   };
 
@@ -41,26 +40,31 @@ function App() {
       album: selectedSong.querySelector('h5').innerText,
       uri: songURI
     };
-    const updatedAray = chosenSongs.filter(song => {
+    const updatedAray = playlistTracks.filter(song => {
       if (song.uri === songToRemove.uri) {
         return false
       } else {
         return true 
       }
     });
-    setChosenSongs(updatedAray);
-    setPlaylist(updatedAray);
+    setPlaylistTracks(updatedAray);
   };
 
-  const renamePlaylist = (e) => {
-    setPlaylistName(e.target.value);
-  };
+  const save = (playlist, playlistName) => {
+    
+    console.log(playlist, playlistName)
+    Spotify.savePlaylist(playlist, playlistName);
+  }
+
+  const nameInputHandler = input => {
+    setPlaylistName(input);
+  }
 
   return (
     <div className="App">
       <SearchBar onSearch={searchSongs}/>
-      <SearchResults songList={songList} clickHandler={addTrack}/>
-      <Playlist chosenSongs={chosenSongs} clickHandler={removeTrack} typeHandler={renamePlaylist} playlistName={playlistName}/>
+      <SearchResults searchResults={searchResults} clickHandler={addTrack}/>
+      <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistURIS={playlistURIS} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
     </div>
   );
 }
