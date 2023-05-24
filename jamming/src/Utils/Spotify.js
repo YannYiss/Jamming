@@ -52,9 +52,9 @@ const Spotify = {
         });
     },
 
-    savePlaylist(playlist, playlistName) {
+    savePlaylist(playlistURIS, playlistName) {
 
-        if(!playlistName || !playlist ) {
+        if(!playlistName || !playlistURIS.length ) {
             return alert('Please enter a name or add a song to save a new playlist') 
         };
 
@@ -74,20 +74,26 @@ const Spotify = {
                 method: 'post',
                 headers: headers,
                 body: JSON.stringify({
-                    name: playlistName,
-                    public: false
-                }).then(response => {
+                    name: playlistName
+                })}).then(response => {
                     return response.json()
                 }).then(jsonResponse => {
                     const playListId = jsonResponse.id;
                     return fetch(`https://api.spotify.com/v1/playlists/${playListId}/tracks`, {
                         method: 'post',
                         headers: headers,
-                        body: JSON.stringify({uris: playlist})
+                        body: JSON.stringify({uris: playlistURIS})
+                        }).then(response => {
+                            return response.json()
+                        }).then(jsonResponse => {
+                            if(jsonResponse.snapshot_id) {
+                                alert(`Playlist '${playlistName}' was saved succesfully!`)
+                            } else {
+                                throw new Error(jsonResponse.error.message)
+                            }
                         })
                     })
-                })
-            })
+        })
     }       
 
 

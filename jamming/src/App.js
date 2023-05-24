@@ -9,7 +9,6 @@ function App() {
   const [searchResults, setSearchResults] = useState([]) 
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  const playlistURIS = []
 
   const searchSongs = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);
@@ -27,7 +26,7 @@ function App() {
     if(playlistTracks.some(song => song.uri === songAdded.uri)) {
       return alert('This song was already added to the playlist');
     } else {
-      setPlaylistTracks(songList => [...songList,songAdded]);
+      setPlaylistTracks(playlist => [...playlist,songAdded]);
     }
   };
 
@@ -50,10 +49,12 @@ function App() {
     setPlaylistTracks(updatedAray);
   };
 
-  const save = (playlist, playlistName) => {
-    
-    console.log(playlist, playlistName)
-    Spotify.savePlaylist(playlist, playlistName);
+  const save = () => {
+    const playlistURIS = playlistTracks.map(track => track.uri);
+    Spotify.savePlaylist(playlistURIS, playlistName);
+    setPlaylistName('New Playlist');
+    setPlaylistTracks([]);
+    setSearchResults([]);
   }
 
   const nameInputHandler = input => {
@@ -64,7 +65,7 @@ function App() {
     <div className="App">
       <SearchBar onSearch={searchSongs}/>
       <SearchResults searchResults={searchResults} clickHandler={addTrack}/>
-      <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistURIS={playlistURIS} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
+      <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
     </div>
   );
 }
