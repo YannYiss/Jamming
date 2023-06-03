@@ -1,0 +1,26 @@
+.search_field {
+    border-radius: 30px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    border: none;
+    outline: 2px solid gray;
+    margin-right: 2rem;
+    width: 35%;
+    color: black;
+}
+
+.search_field:focus {
+    outline: 2px solid rgb(30, 215, 96);
+    transition: 1.5s;
+}
+
+.search_button {
+    border-radius: 30px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    background-color: rgb(30, 215, 96);
+    border: none;
+    color: rgb(25 20 20)
+}

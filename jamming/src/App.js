@@ -63,9 +63,12 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className='title'>Jamming</h1>
       <SearchBar onSearch={searchSongs}/>
-      <SearchResults searchResults={searchResults} clickHandler={addTrack}/>
-      <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
+      <main className='main'>  
+        <SearchResults searchResults={searchResults} clickHandler={addTrack}/>
+        <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
+      </main>
     </div>
   );
 }

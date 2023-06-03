@@ -1,4 +1,5 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useState} from 'react';
+import './SearchBar.css'
 
 export default function SearchBar({onSearch}) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,8 +14,8 @@ export default function SearchBar({onSearch}) {
   
   return (
     <>
-    <input type='text' placeholder='Enter a song title' onChange={searchTypeHandler}/>
-    <button onClick={search}>Search</button>
+    <input type='text' placeholder='Enter a song title' onChange={searchTypeHandler} className='search_field'/>
+    <button onClick={search} className='search_button'>Search</button>
     </>
   )
 }

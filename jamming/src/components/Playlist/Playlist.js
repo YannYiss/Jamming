@@ -1,5 +1,6 @@
 import React from 'react';
 import Track from '../Track/Track';
+import './Playlist.css'
 
 export default function Playlist({playlistTracks, clickHandler, saveHandler, nameInputHandler, playlistName}) {
 
@@ -10,12 +11,12 @@ export default function Playlist({playlistTracks, clickHandler, saveHandler, nam
   return (
     <div className='playlist'>
       <label htmlFor='playlistName' display='none'></label>
-      <input type='text' onChange={typeHandler} id='playlistName' value={playlistName}/>
+      <input type='text' onChange={typeHandler} id='playlistName' value={playlistName} className='playlist_name'/>
       {playlistTracks.map(song => {
         return(
-          <div className='selectedTrack' id={song.uri} key={'p'+song.uri}>
+          <div className='selected_track' id={song.uri} key={'p'+song.uri}>
             <Track songName={song.songName} artist={song.artist} album={song.album} className='track'/>
-            <b onClick={clickHandler}>-</b>
+            <b onClick={clickHandler} className='remove'>-</b>
           </div>
         )
         })}

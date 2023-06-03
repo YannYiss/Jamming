@@ -1,0 +1,15 @@
+.searched_track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.add {
+    font-size: 2rem;
+}
+
+.add:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,56 @@
+.playlist {
+    background: rgba(255, 255, 255, 0.21);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2rem 1rem;
+    max-height: 65vh;
+    overflow: scroll;
+}
+
+.playlist::-webkit-scrollbar{
+    width: 8px;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+    padding: 3px 0px;
+    background: gray;
+    border-radius: 5px;
+}
+
+.playlist::-webkit-scrollbar-thumb:hover {
+    background: rgb(25 20 20);
+}
+
+.playlist_name {
+    background: none;
+    border: none;
+    border-bottom: 3px solid rgb(25 20 20);
+    width: 100%;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.playlist_name:focus {
+    outline: none;
+    border-bottom: 3px solid rgb(30, 215, 96);
+    transition: 1.5s;
+}
+
+.selected_track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.remove {
+    font-size: 2rem;
+}
+
+.remove:hover {
+    cursor: pointer;
+}
