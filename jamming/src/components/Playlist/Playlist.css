@@ -8,6 +8,8 @@
     padding: 2rem 1rem;
     max-height: 65vh;
     overflow: scroll;
+    scrollbar-color: gray;
+    scroll-margin-block-start: 10px;
 }
 
 .playlist::-webkit-scrollbar{
@@ -15,13 +17,16 @@
 }
 
 .playlist::-webkit-scrollbar-thumb {
-    padding: 3px 0px;
     background: gray;
     border-radius: 5px;
 }
 
 .playlist::-webkit-scrollbar-thumb:hover {
-    background: rgb(25 20 20);
+    background: rgb(30, 215, 96);
+}
+
+.playlist::-webkit-scrollbar-corner {
+    display: none;
 }
 
 .playlist_name {

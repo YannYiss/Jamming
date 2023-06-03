@@ -14,12 +14,16 @@
     width: 8px;
 }
 
+.search_results_list::-webkit-scrollbar-corner{
+    display: none;
+}
+
 .search_results_list::-webkit-scrollbar-thumb {
-    padding: 3px 0px;
     background: gray;
     border-radius: 5px;
 }
 
 .search_results_list::-webkit-scrollbar-thumb:hover {
-    background: black;
+    background: rgb(30, 215, 96);
+    transition: 1.5s;
 }
