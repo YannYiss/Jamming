@@ -15,7 +15,7 @@ const Spotify = {
         if(accessTokenMatch && expiresInMatch) {
             accessToken = accessTokenMatch[1]
             const expiresIn = Number(expiresInMatch[1]);
-            //Vamos a programar un setTimeout en el objeto global window para poder refrescar el token cada vez que Spotify lo determine por expiresIn
+            //Vamos a programar un setTimeout en el objeto global window para poder refrescar el token cada vez que Spotify lo solicite por expiresIn
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             //Vamos a agregar una nueva entrada al historial de navegacion para que se rediriga a la pagina raiz si el usuario decide regresar con el boton back del navegador
             window.history.pushState('Access Token', null, '/');

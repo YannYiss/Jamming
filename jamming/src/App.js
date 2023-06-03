@@ -9,6 +9,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]) 
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
+  let isLoggedIn;
 
   const searchSongs = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);
@@ -61,13 +62,26 @@ function App() {
     setPlaylistName(input);
   }
 
+  const login = () => {
+    Spotify.getToken()
+  }
+
+  const loggedInStatus = () => {
+    const accessToken = window.location.href.match(/access_token=[^&]*/)
+    if(accessToken) {
+      isLoggedIn = true;
+    }
+  }
+
+  loggedInStatus();
+
   return (
     <div className="App">
       <h1 className='title'>Jamming</h1>
-      <SearchBar onSearch={searchSongs}/>
+      {isLoggedIn ? <SearchBar onSearch={searchSongs}/> : <button className='login' onClick={login}>Login to begin</button>}
       <main className='main'>  
-        <SearchResults searchResults={searchResults} clickHandler={addTrack}/>
-        <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>
+        {searchResults.length === 0 ? <></> : <SearchResults searchResults={searchResults} clickHandler={addTrack}/>}
+        {playlistTracks.length === 0 ? <></> : <Playlist playlistTracks={playlistTracks} clickHandler={removeTrack} playlistName={playlistName} saveHandler={save} nameInputHandler={nameInputHandler}/>}
       </main>
     </div>
   );
