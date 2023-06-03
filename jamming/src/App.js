@@ -9,7 +9,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]) 
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('New Playlist');
-  let isLoggedIn;
+  let isLoggedIn = false;
 
   const searchSongs = useCallback((term) => {
     Spotify.search(term).then(setSearchResults);
@@ -22,6 +22,7 @@ function App() {
       songName: selectedSong.querySelector('h3').innerText,
       artist: selectedSong.querySelector('h4').innerText,
       album: selectedSong.querySelector('h5').innerText,
+      albumImage: selectedSong.querySelector('img').src,
       uri: songURI
     }
     if(playlistTracks.some(song => song.uri === songAdded.uri)) {
@@ -64,11 +65,13 @@ function App() {
 
   const login = () => {
     Spotify.getToken()
+
   }
 
   const loggedInStatus = () => {
     const accessToken = window.location.href.match(/access_token=[^&]*/)
-    if(accessToken) {
+    const loginSuccesful = window.location.href.match(/login_succesful/)
+    if(accessToken || loginSuccesful) {
       isLoggedIn = true;
     }
   }

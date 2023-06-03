@@ -15,7 +15,7 @@ export default function Playlist({playlistTracks, clickHandler, saveHandler, nam
       {playlistTracks.map(song => {
         return(
           <div className='selected_track' id={song.uri} key={'p'+song.uri}>
-            <Track songName={song.songName} artist={song.artist} album={song.album} className='track'/>
+            <Track songName={song.songName} artist={song.artist} album={song.album} albumImage={song.albumImage} className='track'/>
             <b onClick={clickHandler} className='remove'>-</b>
           </div>
         )

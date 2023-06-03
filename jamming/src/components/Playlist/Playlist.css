@@ -10,6 +10,8 @@
     overflow: scroll;
     scrollbar-color: gray;
     scroll-margin-block-start: 10px;
+    max-width: 40%;
+    min-width: 285px;
 }
 
 .playlist::-webkit-scrollbar{

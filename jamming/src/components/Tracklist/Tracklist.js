@@ -8,7 +8,7 @@ export default function Tracklist({songList, clickHandler}) {
       {songList.map(song => {
         return (
         <div className='searched_track' id={song.uri} key={song.uri}>
-        <Track songName={song.name} artist={song.artist} album={song.album} className='track'/>
+        <Track songName={song.name} artist={song.artist} album={song.album} albumImage={song.albumImage} className='track'/>
         <b onClick={clickHandler} className='add'>+</b>
         </div>
         );

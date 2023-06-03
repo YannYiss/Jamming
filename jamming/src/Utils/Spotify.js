@@ -18,7 +18,7 @@ const Spotify = {
             //Vamos a programar un setTimeout en el objeto global window para poder refrescar el token cada vez que Spotify lo solicite por expiresIn
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             //Vamos a agregar una nueva entrada al historial de navegacion para que se rediriga a la pagina raiz si el usuario decide regresar con el boton back del navegador
-            window.history.pushState('Access Token', null, '/');
+            window.history.pushState('Access Token', null, '/login_succesful');
             return accessToken;
         } else {
             //Si no contamos con el token, vamos a redireccionar al usuario a un login screen para obtenerlo
@@ -47,6 +47,7 @@ const Spotify = {
                 name: song.name,
                 artist: song.artists[0].name,
                 album: song.album.name,
+                albumImage: song.album.images[0].url,
                 uri: song.uri
             }));
         });
