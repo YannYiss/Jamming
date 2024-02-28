@@ -1,5 +1,5 @@
 const clientId = 'f89a9dd60df643578dd11f9862c320b2';
-const redirectUrl = 'https://jammingwithspotify.netlify.app/';
+const redirectUrl = 'https://jammingwithspotify.netlify.app/';  
 let accessToken;
 
 const Spotify = {
@@ -22,7 +22,7 @@ const Spotify = {
             return accessToken;
         } else {
             //Si no contamos con el token, vamos a redireccionar al usuario a un login screen para obtenerlo
-            const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUrl}`;
+            const accessURL = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public playlist-modify-private playlist-read-private&redirect_uri=${redirectUrl}`;
             window.location = accessURL;
         }
     },
